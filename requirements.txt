@@ -1,0 +1,3 @@
+pybotx
+fastapi
+uvicorn

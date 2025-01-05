@@ -1,3 +1,7 @@
 pybotx
 fastapi
 uvicorn
+pytest
+pydantic
+respx
+asgi_lifespan

@@ -12,7 +12,7 @@ from pybotx import (
     build_command_accepted_response,
 )
 
-from bot import bot_dependency
+from app.api.dependencies.bot import bot_dependency
 # from app.logger import logger
 # from app.settings import settings
 

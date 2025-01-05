@@ -2,7 +2,7 @@ from uuid import UUID
 
 from fastapi import FastAPI
 from pybotx import Bot, BotAccountWithSecret, ChatCreatedEvent, HandlerCollector, IncomingMessage
-from routers import router
+from app.api.routers import router
 #from bot import bot [разобраться с коллекторами]
 
 
@@ -32,8 +32,18 @@ async def handle_chat_created(event: ChatCreatedEvent, bot: Bot) -> None:
         body="Добро пожаловать! Это приветственное сообщение.",
     )
 
+
+@collector.default_message_handler
+async def default_handler(_: IncomingMessage, bot: Bot) -> None:
+    await bot.answer_message("Используйте команду `/help` для получения списка команд.")
+
+
+
+
+
+
 # Обработчик команды /commands
-@collector.command("/commands", description="Выводит список доступных команд")
+@collector.command("/help", description="Выводит список доступных команд")
 async def list_commands(message: IncomingMessage, bot: Bot) -> None:
     """Список доступных команд"""
     commands = [
@@ -45,6 +55,31 @@ async def list_commands(message: IncomingMessage, bot: Bot) -> None:
         recipients=message.chat.id,
         body=response,
     )
+
+
+@collector.command_with_help(
+    "/echo",
+    description="Возвращает написанное сообщение",
+)
+async def echo_handler(message: IncomingMessage, bot: Bot) -> None:
+    """`/echo text`
+
+    Reply incoming text after command.
+
+    • `text` - text that should be replied back.
+    """
+    await bot.answer_message(message.argument)
+
+
+
+
+
+
+
+
+
+
+
 
 
 async def startup() -> None:

@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter
 
-from botx import router as bot_router
+from app.api.endpoints.botx import router as bot_router
 
 router = APIRouter()
 

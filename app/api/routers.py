@@ -6,4 +6,4 @@ from app.api.endpoints.botx import router as bot_router
 
 router = APIRouter()
 
-router.include_router(bot_router, tags=["Bot API"])
+router.include_router(bot_router, tags=["bot"])
